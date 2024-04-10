@@ -1,0 +1,6 @@
+@APIBatizoNovato_HostAddress = http://localhost:5048
+
+GET {{APIBatizoNovato_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

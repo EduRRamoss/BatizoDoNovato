@@ -1,0 +1,37 @@
+<h1>CONSULTAR REGRA IMPOSTO POR NOME</h1>
+<h2>*** Pode ser usado para consultar todas.</h2>
+<form class="pure-form" (ngSubmit)="PesquisarPorNome()">
+    <label>Nome:</label><br>
+    <input type="text" name="nome" placeholder="Nome da Regra de Imposto" [(ngModel)]="nomeRegra" [ngModelOptions]="{standalone: true}"><br>
+    <button type="submit" class="pure-button pure-button-primary" (click)="PesquisarPorNome()">Pesquisar</button>
+</form>
+<table class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>Editar</th>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Taxa</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let regraImposto of RegraImposto">
+            <td><button (click)="EditarRegraRedirecionar(regraImposto)"><img src="../../../../assets/editar.png" style="max-width: 25px;"></button></td>
+            <td>{{ regraImposto.codigo }}</td>
+            <td>{{ regraImposto.nome }}</td>
+            <td>{{ regraImposto.taxa }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<mat-paginator 
+  [pageSizeOptions]="[10, 20, 50, 100]" 
+  [pageSize]="pageSize" 
+  [length]="totalItems"
+  [showFirstLastButtons]="true"
+  [pageIndex]="currentPage"
+  (page)="handlePageEvent($event)"
+>
+</mat-paginator>
+

@@ -1,0 +1,37 @@
+<h1>CRIAR UMA NOVA REGRA DE IMPOSTO</h1>
+<form class="pure-form" (ngSubmit)="CriarNovaRegraImposto()">
+    <label>Id (O Id será gerado automaticamente ao término da gravação! Para regras já existentes se manterá o Id antigo.)</label><br>
+    <input type="text" name="codigo" placeholder="Código" [(ngModel)]="id" disabled><br>
+    <label>Nome da Taxa</label><br>
+    <input type="text" name="nome" placeholder="Nome" [(ngModel)]="nome"><br>
+    <label>Valor da Taxa</label><br>
+    <input type="number" name="taxa" placeholder="Taxa" [(ngModel)]="taxa"><br>
+    <button type="button" class="pure-button pure-button-primary" (click)="CriarNovaRegraImposto()">Gravar</button>
+</form>
+
+
+<h1>CONSULTAR REGRAS EXISTENTES POR CODIGO</h1>
+<form class="pure-form">
+    <label>Codigo:</label>
+    <input type="number" name="id" placeholder="Codigo" [(ngModel)]="id">
+    <button type="button" class="pure-button pure-button-primary" (click)="Pesquisar();">Pesquisar</button>
+    ...
+    <button style="background-color: transparent; border: none; cursor: pointer;" (click)="RedirecionarParaPesquisa()"><img src="../../../../assets/lupinha.png" style="max-width: 25px;"></button>
+</form>
+<table class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Taxa</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="">
+        <tr *ngFor = "let regraImposto of RegrasImposto">
+            <td>{{regraImposto.codigo}}</td>
+            <td>{{regraImposto.nome}}</td>
+            <td>{{regraImposto.taxa}}</td>
+        </tr>
+    </tbody>
+</table>

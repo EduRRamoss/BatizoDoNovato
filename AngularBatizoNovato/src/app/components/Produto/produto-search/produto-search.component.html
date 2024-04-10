@@ -1,0 +1,43 @@
+<h1>CONSULTAR PRODUTO POR NOME</h1>
+<h2>*** Pode ser usado para consultar todas.</h2>
+<form class="pure-form" (ngSubmit)="PesquisarPorNome()">
+    <label>Nome:</label><br>
+    <input type="text" name="nome" placeholder="Nome do Produto" [(ngModel)]="nomeProduto" [ngModelOptions]="{standalone: true}"><br>
+    <button type="submit" class="pure-button pure-button-primary" (click)="PesquisarPorNome()">Pesquisar</button>
+</form>
+<table class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>Editar</th>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Preco de Custo</th>
+            <th>Markup</th>
+            <th>Preco de Venda</th>
+            <th>Margem Real</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let produto of produtos">
+            <td><button (click)="EditarProdutoRedirecionar(produto)"><img src="../../../../assets/editar.png" style="max-width: 25px;"></button></td>
+            <td>{{ produto.codigo }}</td>
+            <td>{{ produto.nome }}</td>
+            <td>R$ {{ formatarValores(produto.precoDeCusto)}}</td>
+            <td>{{ formatarValores(produto.markup) }}%</td>
+            <td>R$ {{ formatarValores(produto.precoDeVenda) }}</td>
+            <td>{{ formatarValores(produto.margemReal) }}%</td>
+        </tr>
+    </tbody>
+</table>
+
+<mat-paginator 
+  [pageSizeOptions]="[10, 20, 100]" 
+  [pageSize]="pageSize" 
+  [length]="totalItems" 
+  [showFirstLastButtons]="true"
+  [pageIndex]="currentPage"
+  (page)="handlePageEvent($event)"
+>
+</mat-paginator>
+

@@ -1,0 +1,27 @@
+<div class="header">
+    <div style="background-color: rgb(31,141,214);" class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <img src="../../../../assets/moura icon.png" style="width: 45px;" alt="">
+        <span style="font-size: x-large; color: white;">Batizo do Novato</span>
+    </div>
+</div>
+
+<video autoplay muted loop id="Video" style="width: 100%;">
+    <source src="../../../../assets/buzinasmans.mp4" type="video/mp4">
+</video>
+
+<div class="splash">
+    <div class="pure-g">
+        <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+            <form class="pure-form" (ngSubmit)="Validar()">
+                <fieldset>
+              
+                  <input id="name" type="text" placeholder="Seu Usuário" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}">
+            
+                  <input id="password" type="password" placeholder="Sua Senha" [(ngModel)]="senha" [ngModelOptions]="{standalone: true}">
+              
+                  <button type="submit" class="pure-button">Entrar</button>
+                </fieldset>
+              </form>
+        </div>
+    </div>
+</div>

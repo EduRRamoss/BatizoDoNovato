@@ -1,0 +1,34 @@
+<h1>RELAÇÃO DE PRODUTO</h1>
+<form class="pure-form">
+    <button type="button" class="pure-button pure-button-primary" (click)="Gerar();">Gerar</button>
+</form>
+<table class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Preco de Custo</th>
+            <th>Preco de Venda</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let produto of produtos" >
+            <td><a style="cursor: pointer;" (click)="EditarProdutoRedirecionar(produto)">{{produto.codigo}}</a></td>
+            <td>{{produto.nome}}</td>
+            <td>R$ {{ formatarValores(produto.precoDeCusto) }}</td>
+            <td>R$ {{ formatarValores(produto.precoDeVenda) }}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<mat-paginator 
+  [pageSizeOptions]="[10, 50, 100]" 
+  [pageSize]="pageSize" 
+  [length]="totalItems" 
+  [showFirstLastButtons]="true"
+  [pageIndex]="currentPage"
+  (page)="handlePageEvent($event)"
+>
+</mat-paginator>

@@ -1,0 +1,73 @@
+<h1>CRIAR UM NOVO PRODUTO</h1>
+<label>*Markup será preenchida automaticamente caso fornecido Preço de Custo e Venda!</label><br>
+<label>*Preco de Venda será preenchido automaticamente caso fornecido Preço de Custo e Markup!</label><br>
+<label>*Margem Real será preenchido automaticamente ao fornecer Preço de Custo e Venda!</label><br>
+<form class="pure-form" (ngSubmit)="CriarNovoProduto()">
+    <label>Id (O Id será gerado automaticamente ao término da gravação! Para produtos já existentes se manterá
+        o Id antigo.)</label><br>
+    <input type="text" name="codigo" placeholder="Código" [(ngModel)]="id" disabled><br>
+
+    <label>Nome do Produto</label><br>
+    <input type="text" name="nome" placeholder="Nome" [(ngModel)]="nome"><br>
+
+    <label>Preço de Custo</label><br>
+    <input (keyup)="AutoPreencherMargemReal()" type="text" name="precoCusto" placeholder="Preco de Custo"
+        [(ngModel)]="precoDeCusto" mask="separator.2" [thousandSeparator]="'.'" [decimalMarker]="','" prefix="R$ "><br>
+        
+    <label>Markup</label><br>
+    <input (keyup)="AutoPreencherPrecoVenda()" type="text" name="markup" placeholder="Markup" [(ngModel)]="markup"
+        mask="separator.2" [thousandSeparator]="'.'" [decimalMarker]="','" suffix=" %"><br>
+
+    <label>Preço de Venda</label><br>
+    <input (keyup)="AutoPreencherMarkup()" type="text" name="precoVenda" placeholder="Preco de Venda"
+        [(ngModel)]="precoDeVenda" mask="separator.2" [thousandSeparator]="'.'" [decimalMarker]="','" prefix="R$ "><br>
+
+    <label>Margem Real</label><br>
+    <input type="text" name="margemReal" placeholder="Margem Real" [(ngModel)]="margemReal" mask="separator.2"
+        [thousandSeparator]="'.'" [decimalMarker]="','" suffix=" %"><br>
+
+    <form>
+        <label>Escolha uma Regra de Imposto para esse produto:</label><br>
+        <select name="regraSelecionada" [(ngModel)]="RegraSelecionada">
+            <option *ngFor="let regra of RegrasDisponiveis" [ngValue]="regra">{{ regra.nome }}</option>
+        </select>
+    </form>
+    <br>
+
+    <button type="button" class="pure-button pure-button-primary" (click)="CriarNovoProduto()">Gravar</button>
+</form>
+
+
+<h1>CONSULTAR PRODUTOS EXISTENTES POR CODIGO</h1>
+<form class="pure-form">
+    <label>Codigo:</label>
+    <input type="number" name="id" placeholder="Codigo" [(ngModel)]="id">
+    <button type="button" class="pure-button pure-button-primary" (click)="Pesquisar();">Pesquisar</button>
+    ...
+    <button style="background-color: transparent; border: none; cursor: pointer;"
+        (click)="RedirecionarParaPesquisa()"><img src="../../../../assets/lupinha.png"
+            style="max-width: 25px;"></button>
+</form>
+<table class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Preco de Custo</th>
+            <th>Markup</th>
+            <th>Preco de Venda</th>
+            <th>Margem Real</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="">
+        <tr *ngFor="let produto of Produtos">
+            <td>{{produto.codigo}}</td>
+            <td>{{produto.nome}}</td>
+            <td>R$ {{ formatarValores(produto.precoDeCusto)}}</td>
+            <td>{{ formatarValores(produto.markup) }}%</td>
+            <td>R$ {{ formatarValores(produto.precoDeVenda) }}</td>
+            <td>{{ formatarValores(produto.margemReal) }}%</td>
+        </tr>
+    </tbody>
+</table>

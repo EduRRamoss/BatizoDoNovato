@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj": {}
+    "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\github\\BatizoDoNovato\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj": {
+    "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\github\\BatizoDoNovato\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj",
+        "projectUniqueName": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\github\\BatizoDoNovato\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj",
         "projectName": "APIBatizoNovato",
-        "projectPath": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj",
+        "projectPath": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\github\\BatizoDoNovato\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj",
         "packagesPath": "C:\\Users\\TRE-002\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\BatizoDoNovato\\APIBatizoNovato\\obj\\",
+        "outputPath": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\github\\BatizoDoNovato\\BatizoDoNovato\\APIBatizoNovato\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\TRE-002\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -87,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

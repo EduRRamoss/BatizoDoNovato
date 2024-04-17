@@ -78,9 +78,9 @@ public class ProdutoController : ControllerBase
     {
         try
         {
-            var getProduto = await _context.Produtos.FindAsync(id);
+            var getProduto = _genericRepo.GetByID(id);
 
-            if (getProduto == null)
+            if (getProduto == false)
                 return BadRequest($"O produto de id {id} é inexistente");
 
             getProduto.Nome = produtoModel.Nome;
@@ -90,12 +90,7 @@ public class ProdutoController : ControllerBase
             getProduto.MargemReal = produtoModel.MargemReal;
             getProduto.RegraDeImpostoId = produtoModel.RegraDeImpostoId;
 
-
-
-            _context.Produtos.Update(getProduto);
-            await _context.SaveChangesAsync();
-
-            return Ok(getProduto);
+            return Ok(_genericRepo.Update(getProduto));
         }
         catch (Exception)
         {

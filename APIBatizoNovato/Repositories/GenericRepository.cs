@@ -1,4 +1,3 @@
-
 using APIBatizoNovato.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,9 +30,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return entity;
     }
 
-    public Task<T> Update(T entity)
+    public async Task<T> Update(T entity)
     {
-        throw new NotImplementedException();
+       _context.Set<T>().Update(entity);
+       await _context.SaveChangesAsync();
+       return entity;
     }
 
     public Task<T> Delete(int id)

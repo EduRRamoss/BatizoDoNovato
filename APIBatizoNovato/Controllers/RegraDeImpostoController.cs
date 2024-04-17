@@ -10,34 +10,27 @@ namespace APIBatizoNovato.Controllers;
 public class RegraDeImpostoController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IGenericRepository<RegraImposto> _genericRepo
 
-    public RegraDeImpostoController(ApplicationDbContext context)
+    public RegraDeImpostoController(ApplicationDbContext context, IGenericRepository<RegraImposto> genericRepo)
     {
         _context = context;
+        _genericRepo = genericRepo;
     }
 
 
     [HttpGet("buscar-todas-regras-imposto")]
-    public async Task<ActionResult<IEnumerable<RegraImposto>>> ConsultarRegraTodos()
-    {
-        try
-        {
-            var getall = await _context.RegraDeImpostos.Include(e => e.Produto).ToListAsync();
-            return Ok(getall);
-        }
-        catch (Exception)
-        {
-            
-            throw;
-        }
-    }
+    public async Task<ActionResult<IEnumerable<RegraImposto>>> ConsultarRegraTodos() =>
+        Ok(await _genericRepo.GetAll()
+    );
+    //var getall = await _context.RegraDeImpostos.Include(e => e.Produto).ToListAsync();
 
     [HttpGet("buscar-regra-por-codigo/{Codigo}")]
     public async Task<ActionResult<RegraImposto>> ConsultarRegraPorCodigo(int Codigo)
     {
         try
         {
-            var getRegra = await _context.RegraDeImpostos.FindAsync(Codigo);
+            var getRegra = await _genericRepo.GetByID(Codigo);
 
             if(getRegra == null)
                 return BadRequest("Cadastro inexistente");
@@ -50,17 +43,6 @@ public class RegraDeImpostoController : ControllerBase
             throw;
         }
     }
-
-    /*
-    [HttpGet("buscar-regra-por-nome/{nome}")]
-    public async Task<ActionResult<IEnumerable<RegraImposto>>> ConsultarRegraPorNome(string nome)
-    {
-        var getRegras = await _context.RegraDeImpostos.
-
-        return Ok();
-    }*/
-
-
 
     [HttpPost("criar-nova-regradeimposto")]
     public async Task<ActionResult<RegraImposto>> CriarNovaRegraDeImposto([FromBody] RegraImposto regraImpostoModel)
@@ -79,10 +61,7 @@ public class RegraDeImpostoController : ControllerBase
                 Taxa = regraImpostoModel.Taxa
             };
 
-            _context.RegraDeImpostos.Add(newRegraImposto);
-            await _context.SaveChangesAsync();
-
-            return Ok(newRegraImposto);
+            return Ok(_genericRepo.Add(newRegraImposto));
         }
         catch (Exception)
         {
@@ -91,13 +70,12 @@ public class RegraDeImpostoController : ControllerBase
         }
     }
 
-
     [HttpPut("editar-regra-imposto-existente/{id:int}")]
     public async Task<ActionResult<RegraImposto>> EditarRegraImpostoExistente([FromBody] RegraImposto regraImpostoModel, int id)
     {
         try
         {
-            var getRegra = await _context.RegraDeImpostos.FindAsync(id);
+            var getRegra = await _genericRepo.GetByID(id);
 
             if (getRegra == null)
                 return BadRequest($"A Regra de id {id} é inexistente");
@@ -105,12 +83,7 @@ public class RegraDeImpostoController : ControllerBase
             getRegra.Nome = regraImpostoModel.Nome;
             getRegra.Taxa = regraImpostoModel.Taxa;
 
-
-
-            _context.RegraDeImpostos.Update(getRegra);
-            await _context.SaveChangesAsync();
-
-            return Ok(getRegra);
+            return Ok(_genericRepo.Update(getRegra));
         }
         catch (Exception)
         {
@@ -118,6 +91,4 @@ public class RegraDeImpostoController : ControllerBase
             throw;
         }
     }
-
-    
 }

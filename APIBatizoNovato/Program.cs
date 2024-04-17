@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 using APIBatizoNovato.Context;
+using APIBatizoNovato.Entities;
+using APIBatizoNovato.Repositories;
 using APIBatizoNovato.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +22,9 @@ builder.Services.AddControllers()
 builder.Services.AddCors();
 builder.Services.AddScoped<TokenService>();
 
-//JWT AUTENTIFICACAO
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(DbContext), typeof(ApplicationDbContext));
+builder.Services.AddScoped<IRegraImpostoRepository, RegraImpostoRepository>();
 
 
 var app = builder.Build();

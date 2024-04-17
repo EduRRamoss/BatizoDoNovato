@@ -1,7 +1,7 @@
 using APIBatizoNovato.Context;
 using APIBatizoNovato.Entities;
+using APIBatizoNovato.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace APIBatizoNovato.Controllers;
 
@@ -10,32 +10,27 @@ namespace APIBatizoNovato.Controllers;
 public class ProdutoController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
-    public ProdutoController(ApplicationDbContext context)
+    private readonly IGenericRepository<Produto> _genericRepo;
+    public ProdutoController(ApplicationDbContext context, IGenericRepository<Produto> genericRepo)
     {
         _context = context;
+        _genericRepo = genericRepo;
     }
+
+
+
 
     [HttpGet("buscar-todos-produtos")]
-    public async Task<ActionResult<IEnumerable<Produto>>> BuscarTodosProdutos(){
-        try
-        {
-            return Ok(await _context.Produtos.ToListAsync());
-        }
-        catch (Exception)
-        {
-            
-            throw;
-        }
-    }
-
+    public async Task<ActionResult<IEnumerable<Produto>>> BuscarTodosProdutos() =>
+        Ok(await _genericRepo.GetAll()
+    );
 
     [HttpGet("buscar-produto-por-codigo/{Codigo}")]
     public async Task<ActionResult<Produto>> BuscarProdutoPorCodigo(int Codigo)
     {
         try
         {
-            var getProduto = await _context.Produtos.FindAsync(Codigo);
+            var getProduto = await _genericRepo.GetByID(Codigo);
 
             if (getProduto == null)
                 return BadRequest("Cadastro inexistente");
@@ -57,7 +52,7 @@ public class ProdutoController : ControllerBase
         {
             if (produtoModel == null)
                 return BadRequest("Ha informacoes invalidas, tente novamente");
-                //Adc mais validacoes dps
+            //Adc mais validacoes dps
 
             var newProduto = new Produto
             {
@@ -69,10 +64,7 @@ public class ProdutoController : ControllerBase
                 RegraDeImpostoId = produtoModel.RegraDeImpostoId
             };
 
-            _context.Produtos.Add(newProduto);
-            await _context.SaveChangesAsync();
-
-            return Ok(newProduto);
+            return Ok(await _genericRepo.Add(newProduto));
         }
         catch (Exception)
         {
@@ -86,9 +78,9 @@ public class ProdutoController : ControllerBase
     {
         try
         {
-            var getProduto = await _context.Produtos.FindAsync(id);
+            var getProduto = _genericRepo.GetByID(id);
 
-            if (getProduto == null)
+            if (getProduto == false)
                 return BadRequest($"O produto de id {id} é inexistente");
 
             getProduto.Nome = produtoModel.Nome;
@@ -98,12 +90,7 @@ public class ProdutoController : ControllerBase
             getProduto.MargemReal = produtoModel.MargemReal;
             getProduto.RegraDeImpostoId = produtoModel.RegraDeImpostoId;
 
-
-
-            _context.Produtos.Update(getProduto);
-            await _context.SaveChangesAsync();
-
-            return Ok(getProduto);
+            return Ok(_genericRepo.Update(getProduto));
         }
         catch (Exception)
         {

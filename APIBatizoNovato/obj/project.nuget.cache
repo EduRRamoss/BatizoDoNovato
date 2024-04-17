@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "44yuQF0KwRYyQ3osd/DSuCEoNvbijsV6LLoSzWItxDPDh/ofPP8nuCzINjf/9gMvh/jNAi561PIqzvci0XmRuA==",
+  "dgSpecHash": "5oqzcqHF3qeebru1fDmnYKSkw9CASV9ZCoZFQNriuV09xRsC/o1pYJ1lNsTC1y2tPWsK97xKSBu6xgV2ZD+VbA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj",
+  "projectFilePath": "C:\\Users\\TRE-002\\Desktop\\Treinamento Eduardo RR\\github\\BatizoDoNovato\\BatizoDoNovato\\APIBatizoNovato\\APIBatizoNovato.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TRE-002\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\TRE-002\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
